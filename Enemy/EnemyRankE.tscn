@@ -1,0 +1,202 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://World/Knife.png" type="Texture" id=3]
+[ext_resource path="res://CheckBoxes/HitBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy/EnemyRankE.gd" type="Script" id=5]
+[ext_resource path="res://Enemy/RayCaster.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Weapon:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -31.1022 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Weapon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Move"
+length = 0.6
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Weapon:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ -31.1, -15.7716, -0.443131, 14.8853, -0.443129, -15.7716, -31.1 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "create_dust_effect"
+}, {
+"args": [  ],
+"method": "create_dust_effect"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 6 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 6 )
+
+[node name="EnemyRankE" instance=ExtResource( 1 )]
+z_index = -1
+script = ExtResource( 5 )
+COIN = 10
+WALKING_DIRECTION = -1
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -7 )
+texture = ExtResource( 2 )
+hframes = 12
+
+[node name="Weapon" parent="Sprite" index="0"]
+show_behind_parent = true
+position = Vector2( 0, 1 )
+rotation = -0.542836
+
+[node name="Sprite" type="Sprite" parent="Sprite/Weapon" index="0"]
+position = Vector2( 10, 0 )
+texture = ExtResource( 3 )
+
+[node name="HitBox" parent="Sprite/Weapon" index="1" instance=ExtResource( 4 )]
+collision_layer = 4
+damage = 2
+
+[node name="Collider" parent="Sprite/Weapon/HitBox" index="0"]
+position = Vector2( 12, 0 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Move"
+anims/Idle = SubResource( 2 )
+anims/Move = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0, -5 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="HitBox" parent="." index="3"]
+position = Vector2( 0, -6 )
+
+[node name="Collider" parent="HitBox" index="0"]
+shape = SubResource( 5 )
+
+[node name="HurtBox" parent="." index="4"]
+position = Vector2( 0, -6 )
+
+[node name="Collider" parent="HurtBox" index="0"]
+shape = SubResource( 6 )
+
+[node name="EnemyStats" parent="." index="5"]
+max_health = 3
+
+[node name="VisibilityNotifier2D" parent="." index="6"]
+position = Vector2( 0, -6.5 )
+scale = Vector2( 0.5, 0.75 )
+
+[node name="RayCaster" parent="." index="7" instance=ExtResource( 6 )]
+position = Vector2( 0, 1 )
+
+[node name="FloorLeft" parent="RayCaster" index="0"]
+position = Vector2( -4, -2 )
+enabled = true
+collision_mask = 2
+
+[node name="FloorRight" parent="RayCaster" index="1"]
+position = Vector2( 4, -2 )
+enabled = true
+collision_mask = 2
+
+[node name="WallLeft" parent="RayCaster" index="2"]
+position = Vector2( 0, -8 )
+enabled = true
+collision_mask = 2
+
+[node name="WallRight" parent="RayCaster" index="3"]
+position = Vector2( 0, -8 )
+enabled = true
+collision_mask = 2
+
+[node name="MainCenter" parent="." index="9"]
+position = Vector2( 0, -7 )
+
+[node name="Relax" type="Timer" parent="." index="10"]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Relax" to="." method="_on_Relax_timeout"]
+
+[editable path="Sprite/Weapon/HitBox"]
+[editable path="HitBox"]
+[editable path="HurtBox"]
+[editable path="RayCaster"]

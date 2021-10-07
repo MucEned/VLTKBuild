@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="RayCaster" type="Node2D"]
+
+[node name="FloorLeft" type="RayCast2D" parent="."]
+position = Vector2( -4, 0 )
+cast_to = Vector2( 0, 4 )
+
+[node name="FloorRight" type="RayCast2D" parent="."]
+position = Vector2( 4, 0 )
+cast_to = Vector2( 0, 4 )
+
+[node name="WallLeft" type="RayCast2D" parent="."]
+cast_to = Vector2( -8, 0 )
+
+[node name="WallRight" type="RayCast2D" parent="."]
+cast_to = Vector2( 8, 0 )

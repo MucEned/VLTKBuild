@@ -1,0 +1,355 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy/EnemyRankD.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://World/BowTemp.png" type="Texture" id=4]
+[ext_resource path="res://Enemy/RayCaster.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -2, -1 ), Vector2( -2, -2 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Jump"
+loop = true
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 2.21914, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -6 ), Vector2( 0, -44 ), Vector2( 0, -6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 2.21914, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -6 ), Vector2( 0, -44 ), Vector2( 0, -6 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 2.21914, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -6 ), Vector2( 0, -44 ), Vector2( 0, -6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 2.21914, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -6 ), Vector2( 0, -44 ), Vector2( 0, -6 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.26, 0.32, 0.38, 0.44, 0.5, 1, 1.001 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "create_jump_effect"
+}, {
+"args": [ 50 ],
+"method": "shot_the_arrow"
+}, {
+"args": [ 50 ],
+"method": "shot_the_arrow"
+}, {
+"args": [ 75 ],
+"method": "shot_the_arrow"
+}, {
+"args": [ 75 ],
+"method": "shot_the_arrow"
+}, {
+"args": [ 100 ],
+"method": "shot_the_arrow"
+}, {
+"args": [  ],
+"method": "back_to_idle_state"
+}, {
+"args": [  ],
+"method": "create_jump_effect"
+} ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Weapon:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.38, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 35.6113, 15.6655, -33.0106, 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Move"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Weapon:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, -8.72041, -17.4408, -26.1612, -17.4408, -8.72042, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Stand"
+length = 2.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 4, 5, 6, 7, 8, 9, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.1, 1.15, 1.2, 1.3, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -2, 0 ), Vector2( -1.5, -1 ), Vector2( -3, 0 ), Vector2( -3, -2 ), Vector2( -4, -1 ), Vector2( -3, -1 ), Vector2( -2, 0 ), Vector2( -3, 1 ), Vector2( -1, 1 ), Vector2( -1, -1 ), Vector2( 0, 0 ), Vector2( -1.5, -1 ), Vector2( -3, 0 ), Vector2( -3, -2 ), Vector2( -4, -1 ), Vector2( -3, -1 ), Vector2( -2, 0 ), Vector2( -3, 1 ), Vector2( -1, 1 ), Vector2( -1, -1 ), Vector2( 0, 0 ), Vector2( 2, -1 ), Vector2( 0, -1 ), Vector2( -2, -1 ), Vector2( -2, -3 ), Vector2( -2, -1 ), Vector2( -2, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Weapon:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.3, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, -18.8267, -4.83058 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 300 ],
+"method": "shot_the_arrow"
+}, {
+"args": [  ],
+"method": "back_to_idle_state"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 3, 6 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 7 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 7 )
+
+[node name="EnemyRankD" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+COIN = 15
+WALKING_DIRECTION = 1
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 3 )
+hframes = 12
+frame = 10
+
+[node name="Weapon" parent="Sprite" index="0"]
+show_behind_parent = true
+position = Vector2( -2, -1 )
+
+[node name="Sprite" type="Sprite" parent="Sprite/Weapon" index="0"]
+position = Vector2( 8, 0 )
+texture = ExtResource( 4 )
+
+[node name="ShotPoint" type="Position2D" parent="Sprite/Weapon/Sprite" index="0"]
+position = Vector2( 5, 0 )
+
+[node name="PlayerCatcher" type="RayCast2D" parent="Sprite" index="1"]
+enabled = true
+cast_to = Vector2( 200, 0 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+anims/Jump = SubResource( 2 )
+anims/Move = SubResource( 3 )
+anims/Stand = SubResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="2"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, -6 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="HitBox" parent="." index="3"]
+position = Vector2( 0, -6 )
+
+[node name="Collider" parent="HitBox" index="0"]
+shape = SubResource( 6 )
+
+[node name="HurtBox" parent="." index="4"]
+position = Vector2( 0, -6 )
+
+[node name="Collider" parent="HurtBox" index="0"]
+shape = SubResource( 7 )
+
+[node name="EnemyStats" parent="." index="5"]
+max_health = 5
+
+[node name="VisibilityNotifier2D" parent="." index="6"]
+position = Vector2( 0, -7.5 )
+scale = Vector2( 0.5, 0.75 )
+
+[node name="MainCenter" parent="." index="8"]
+position = Vector2( 0, -8 )
+
+[node name="RayCaster" parent="." index="9" instance=ExtResource( 5 )]
+
+[node name="FloorLeft" parent="RayCaster" index="0"]
+position = Vector2( -4, -1 )
+enabled = true
+collision_mask = 2
+
+[node name="FloorRight" parent="RayCaster" index="1"]
+position = Vector2( 4, -1 )
+enabled = true
+collision_mask = 2
+
+[node name="WallLeft" parent="RayCaster" index="2"]
+position = Vector2( 0, -8 )
+enabled = true
+collision_mask = 2
+
+[node name="WallRight" parent="RayCaster" index="3"]
+position = Vector2( 0, -8 )
+enabled = true
+collision_mask = 2
+
+[node name="AttackCooldown" type="Timer" parent="." index="10"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="LeftEyes" type="RayCast2D" parent="." index="11"]
+position = Vector2( 0, -6 )
+enabled = true
+cast_to = Vector2( -200, 0 )
+
+[node name="RightEyes" type="RayCast2D" parent="." index="12"]
+position = Vector2( 0, -6 )
+enabled = true
+cast_to = Vector2( 200, 0 )
+
+[node name="TurnHelper" type="Timer" parent="." index="14"]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
+[connection signal="timeout" from="TurnHelper" to="." method="_on_TurnHelper_timeout"]
+
+[editable path="HitBox"]
+[editable path="HurtBox"]
+[editable path="RayCaster"]

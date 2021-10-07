@@ -1,0 +1,155 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/Shop.gd" type="Script" id=2]
+
+[node name="Shop" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="."]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = -28.0
+auto_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 150.0
+margin_bottom = 54.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 13.0
+margin_right = 156.0
+margin_bottom = 48.0
+text = "SHOP
+\"Buy those items to keep your sword work normaly\"
+(Use once when bought)"
+align = 2
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyButton" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -23.0
+margin_right = 72.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( -83, -62 )
+text = "Buy 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuickBuyButton" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 96.0
+margin_top = -23.0
+margin_right = 160.0
+margin_bottom = -7.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( -83, -62 )
+text = "All in once"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Warning" type="ColorRect" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -59.0
+margin_bottom = 43.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Warning"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 317.0
+margin_bottom = 99.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Warning"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 171.0
+margin_bottom = -7.0
+text = "Your cart have:
+-2x Muc
+-3x Ened
+-1x Tris
+Total: 123 Energy with 1230 coins"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accept" type="Button" parent="Warning"]
+margin_left = 176.0
+margin_top = 62.0
+margin_right = 240.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 64, 30 )
+text = "Accept"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="Warning"]
+margin_left = 246.0
+margin_top = 62.0
+margin_right = 310.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 64, 30 )
+text = "Gimmy a sec..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="BuyButton" to="." method="_on_BuyButton_pressed"]
+[connection signal="pressed" from="QuickBuyButton" to="." method="_on_QuickBuyButton_pressed"]
+[connection signal="pressed" from="Warning/Accept" to="." method="_on_Accept_pressed"]
+[connection signal="pressed" from="Warning/Cancel" to="." method="_on_Cancel_pressed"]

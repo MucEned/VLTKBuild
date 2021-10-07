@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Projectile" type="Node"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

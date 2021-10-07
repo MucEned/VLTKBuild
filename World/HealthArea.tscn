@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://CheckBoxes/HitBox.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 32, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -50, 0 )
+angular_velocity = 405.91
+angular_velocity_random = 0.57
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 8 )
+
+[node name="HealthArea" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 64
+lifetime = 2.0
+process_material = SubResource( 3 )
+
+[node name="HitBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+damage = -10
+
+[node name="Collider" parent="HitBox" index="0"]
+position = Vector2( 0, -8 )
+shape = SubResource( 4 )
+
+[editable path="HitBox"]
