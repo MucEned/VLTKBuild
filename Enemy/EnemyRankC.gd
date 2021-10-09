@@ -139,5 +139,8 @@ func create_jump_effect():
 	pass
 
 func _on_EnemyStats_enemy_drop():
-	Utils.instance_scene_on_main(Trophy, global_position)
+	call_deferred("drop")
 	pass # Replace with function body.
+
+func drop():
+	Utils.instance_scene_on_main(Trophy, global_position)

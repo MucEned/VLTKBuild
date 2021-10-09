@@ -9,6 +9,7 @@ onready var Par = $Particles2D
 func _ready():
 	pass # Replace with function body.
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if Data.load_player_data().bell == true:
 		Par.visible = true
@@ -16,6 +17,7 @@ func _process(delta):
 		Par.visible = false
 	pass
 
+# warning-ignore:unused_argument
 func _on_HurtBox_hit(damage):
 	Utils.instance_scene_on_main(RingEffect, global_position)
 	var old_data = Data.load_player_data()

@@ -10,6 +10,7 @@ onready var player_node = get_parent().get_parent().get_parent()
 
 var Ki = ResourceLoader.Ki
 
+# warning-ignore-all:unused_argument
 func _process(delta):
 	var player = get_parent()
 	rotation = player.get_local_mouse_position().angle()

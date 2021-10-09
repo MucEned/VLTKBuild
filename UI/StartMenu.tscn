@@ -47,11 +47,11 @@ rect_min_size = Vector2( 56, 16 )
 text = "QUIT"
 
 [node name="Reset" type="Button" parent="."]
-margin_left = 255.0
-margin_top = 3.0
-margin_right = 317.0
-margin_bottom = 14.0
-text = "Reset fot tester"
+margin_left = 274.0
+margin_top = 167.0
+margin_right = 318.0
+margin_bottom = 178.0
+text = "Reset data"
 __meta__ = {
 "_edit_use_anchors_": false
 }

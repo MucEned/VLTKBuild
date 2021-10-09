@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/PixelFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://World/Thanks.gd" type="Script" id=2]
+
+[node name="Thanks" type="Label"]
+margin_left = -160.0
+margin_top = -64.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "Thanks for your testing"
+align = 1
+valign = 1
+autowrap = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+textArray = [ "Hello player", "Firstly, thanks for your playing", "I know what difficulties you went through to get here", "Although this game is not perfect ", "But you finished it", "Once again, thank you very much ", "This is one of the random songs I listen to while making this game ", "Not bad is it? ", "Wish you will always be happy", "See you again <3 Peace" ]
+
+[node name="Switch" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_Thanks_visibility_changed"]
+[connection signal="timeout" from="Switch" to="." method="_on_Switch_timeout"]

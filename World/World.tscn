@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/TileMap.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://World/Sign.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Enemy/EnemyRankB.tscn" type="PackedScene" id=22]
 [ext_resource path="res://World/Brick.tscn" type="PackedScene" id=23]
+[ext_resource path="res://World/Thanks.tscn" type="PackedScene" id=25]
 [ext_resource path="res://World/SpaceKey.gd" type="Script" id=27]
 [ext_resource path="res://World/Bell.tscn" type="PackedScene" id=28]
 [ext_resource path="res://World/Tele.tscn" type="PackedScene" id=29]
@@ -1039,19 +1040,12 @@ __meta__ = {
 
 [node name="Guide" type="Node" parent="Game"]
 
-[node name="Thanks" type="Label" parent="Game/Guide"]
+[node name="Thanks" parent="Game/Guide" instance=ExtResource( 25 )]
 visible = false
 margin_left = 12160.0
-margin_top = 512.0
+margin_top = 480.0
 margin_right = 12305.0
-margin_bottom = 527.0
-rect_scale = Vector2( 3, 3 )
-custom_fonts/font = ExtResource( 14 )
-text = "Thanks for your testing"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 495.0
 
 [node name="AD" type="Label" parent="Game/Guide"]
 margin_left = 183.0
@@ -1162,6 +1156,9 @@ Bottom_Limit_Ready = 180
 
 [node name="Shop" parent="UI" index="0"]
 visible = true
+
+[node name="Thanks" parent="UI" index="5"]
+visible = false
 
 [node name="WorldBound" parent="." instance=ExtResource( 8 )]
 position = Vector2( 12448, 624 )
@@ -3616,7 +3613,7 @@ position = Vector2( 7544, -118 )
 [connection signal="body_entered" from="Game/CameraFree" to="Camera2D" method="_on_CameraFree_body_entered"]
 [connection signal="body_entered" from="Game/CameraFree" to="UI" method="_on_CameraFree_body_entered"]
 [connection signal="tree_exited" from="RankCGroup/EnemyRankC/Key" to="GateGroup/Gate1" method="_on_Key_tree_exited"]
-[connection signal="tree_exited" from="EnemyRankB/Key" to="." method="_on_Key_tree_exited"]
+[connection signal="tree_exited" from="EnemyRankB/Key" to="UI" method="_on_Key_tree_exited"]
 
 [editable path="Game/CameraFree"]
 [editable path="Game/Tele"]

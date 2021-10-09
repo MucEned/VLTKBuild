@@ -6,6 +6,7 @@ const DashEffect = preload("res://Effect/DashEffect.tscn")
 const DustEffect = preload("res://Effect/DustEffect.tscn")
 const JumpEffect = preload("res://Effect/JumpEffect.tscn")
 const KnifeClone = preload("res://Enemy/KnifeClone.tscn")
+const MusicBox = preload("res://Music/MusicBox.tscn")
 
 enum DIRECTION {
 	LEFT = -1,
@@ -61,6 +62,7 @@ func _ready():
 	
 	target_pos = global_position.x
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	global_position.y = position_helper
 	
@@ -198,6 +200,7 @@ func return_to_idle():
 	was_throw = false
 	attack_state = IDLE
 
+# warning-ignore:unused_argument
 func _on_ArrowCatcher_body_entered(body):
 	if can_do_next_attack:
 		throw_forward()
@@ -283,22 +286,11 @@ func to_players_back():
 	back = false
 	position.x -= sprite.scale.x * 32
 	pass
-#func _physics_process(delta):
-#	if playerCatcher.is_colliding():
-#		if blink.is_stopped():
-#			blink.start()
-#			last_player_pos_x = playerCatcher.get_collision_point().x
-#
-#func _on_Blink_timeout():
-#	if playerCatcher.is_colliding():
-#		print("Player to me: " + str(playerCatcher.get_collision_point().x - global_position.x))
-#		print("Player velocity: " + str(last_player_pos_x - playerCatcher.get_collision_point().x) + " per 0.1s")
-#	else:
-#		print("I cant see player")
-#	pass # Replace with function body.
 
+func musicbox():
+	Utils.instance_scene_on_main(MusicBox, $MainCenter.global_position)
+	pass
 
-
-
-
-
+func _on_EnemyStats_enemy_final_death():
+	call_deferred("musicbox")
+	pass # Replace with function body.
