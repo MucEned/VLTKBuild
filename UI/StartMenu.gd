@@ -2,6 +2,8 @@ extends Control
 
 var bug_catcher = false
 
+var Data = ResourceLoader.SaverAndLoader
+
 func _ready():
 	VisualServer.set_default_clear_color(Color.black)
 
@@ -16,3 +18,7 @@ func _on_LoadButton_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+func _on_Reset_pressed():
+	Data.reinit()
+	pass # Replace with function body.

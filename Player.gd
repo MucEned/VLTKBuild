@@ -9,10 +9,13 @@ const Reload = preload("res://World/RestartCount.tscn")
 
 const Sword = preload("res://Player/PlayerSword.tscn")
 const Bow = preload("res://Player/Bow.tscn")
+const Spear = preload("res://Player/Spear.tscn")
+const Knife = preload("res://Player/Bow.tscn")
 
 var PlayerStats = ResourceLoader.PlayerStats
 var MainInstances = ResourceLoader.MainInstances
 var Ki = ResourceLoader.Ki
+var Data = ResourceLoader.SaverAndLoader
 
 export (int) var ACCELERATION = 128 #gia toc
 export (int) var MAX_SPEED = 128
@@ -32,8 +35,10 @@ enum{
 	WALL_SLIDE
 }
 enum{
-	SWORD, 
-	BOW
+	SWORD = 0, 
+	BOW = 1,
+	SPEAR = 2,
+	KNIFE = 3
 }
 
 var state = MOVE
@@ -60,6 +65,9 @@ func set_invincible(value):
 	invincile = value
 
 func _ready():
+	
+	Ki.set_ki(Data.load_player_data().current_max_ki)
+	
 	PlayerStats.health = 4
 	PlayerStats.connect("player_died", self, "_on_player_died")
 	MainInstances.Player = self
@@ -106,8 +114,17 @@ func _physics_process(delta):
 		elif Ki.ki_calculate(E_PER_DASH):
 			extra_dash()
 		
-	if Input.is_action_just_pressed("switch"):
-		change_weapon()
+	if Input.is_action_just_pressed("switch_forward"):
+		change_weapon(1)
+		
+	if Input.is_action_just_pressed("switch_backward"):
+		change_weapon(-1)
+		
+	if Input.is_action_just_pressed("reset_weapon"):
+		Data.debug_func()
+		
+	if Input.is_action_just_pressed("cheat"):
+		Data.cheat()
 
 func create_dust_effect():
 	var dustEffect = DustEffect.instance()
@@ -252,15 +269,18 @@ func _on_player_died():
 	Utils.call_deferred("instance_scene_on_main", DeathEffect, global_position)
 	queue_free()
 	
-func change_weapon():
-	var new_weapon
-	match current_weapon:
-		SWORD:
-			new_weapon = Bow.instance()
-			current_weapon = BOW
-		BOW:
-			new_weapon = Sword.instance()
-			current_weapon = SWORD
+func change_weapon(to):
+	var full_weapon_array = [1, 2, 3]
+	var full_object = [Sword, Bow, Spear, Knife]
+	var my_weapon = [0]
+	var my_data = Data.load_player_data()
+	for i in 3:
+		if my_data.weapons[i]:
+			my_weapon.push_back(full_weapon_array[i])
+			
+	var next_weapon = my_weapon[(my_weapon.find(current_weapon, 0) + to) % my_weapon.size()]
+	var new_weapon = full_object[next_weapon].instance()
+	current_weapon = next_weapon
 	var last_weapon = weapon.get_child(0)
 	weapon.add_child(new_weapon)
 	new_weapon.global_position = weapon.global_position

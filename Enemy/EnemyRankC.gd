@@ -24,6 +24,7 @@ const SpinEffect = preload("res://Effect/SpinEffect.tscn")
 const VerticleSpinEffect = preload("res://Effect/VerticleSpinEffect.tscn")
 const DustEffect = preload("res://Effect/DustEffect.tscn")
 const JumpEffect = preload("res://Effect/JumpEffect.tscn")
+const Trophy = preload("res://World/SpearWeapon.tscn")
 
 onready var playerCatcher = $Sprite/PlayerCatcher
 onready var playerJumpCatcher = $Sprite/PlayerJumpCatcher
@@ -136,3 +137,7 @@ func create_dust_effect():
 func create_jump_effect():
 	Utils.instance_scene_on_main(JumpEffect, global_position)
 	pass
+
+func _on_EnemyStats_enemy_drop():
+	Utils.instance_scene_on_main(Trophy, global_position)
+	pass # Replace with function body.

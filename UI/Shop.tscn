@@ -50,9 +50,9 @@ margin_left = 13.0
 margin_top = 13.0
 margin_right = 156.0
 margin_bottom = 48.0
-text = "SHOP
-\"Buy those items to keep your sword work normaly\"
-(Use once when bought)"
+text = "Muc's Shop
+------------------
+Game make by INK.MUC"
 align = 2
 valign = 1
 autowrap = true
@@ -114,8 +114,9 @@ __meta__ = {
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 171.0
+margin_right = 313.0
 margin_bottom = -7.0
+meta_underlined = false
 text = "Your cart have:
 -2x Muc
 -3x Ened

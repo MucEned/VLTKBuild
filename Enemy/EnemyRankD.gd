@@ -2,6 +2,7 @@ extends "res://Enemy/Enemy.gd"
 
 const Arrow = preload("res://Player/Arrow.tscn")
 const JumpEffect = preload("res://Effect/JumpEffect.tscn")
+const Trophy = preload("res://World/BowWeapon.tscn")
 
 enum DIRECTION {
 	LEFT = -1,
@@ -103,4 +104,8 @@ func create_jump_effect():
 
 func _on_TurnHelper_timeout():
 	turn_again = true
+	pass # Replace with function body.
+
+func _on_EnemyStats_enemy_drop():
+	Utils.instance_scene_on_main(Trophy, global_position)
 	pass # Replace with function body.

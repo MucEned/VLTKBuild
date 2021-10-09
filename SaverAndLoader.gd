@@ -7,8 +7,9 @@ var player_save_path = SAVE_DIR + "ủplayer.dat"
 var game_save_path = SAVE_DIR + "ủgame.dat"
 
 var player_default = {
-	"max_hp": 4,
-	"current_ki": 50
+	"bell": false,
+	"current_max_ki": 50,
+	"weapons": [false,false,false]
 }
 
 var game_default = {
@@ -16,13 +17,25 @@ var game_default = {
 	"coin": 0
 }
 
+var game_cheat = {
+	"highest_score": 0,
+	"coin": 999999
+}
+
 var special_coin = 127
 
 var current_coin = 0
 signal current_coin_changed(value)
 
-func debug_func():
+func reinit():
+	save_player_data(player_default)
 	save_game_data(game_default)
+
+func debug_func():
+	save_player_data(player_default)
+
+func cheat():
+	save_game_data(game_cheat)
 
 func get_current_coin():
 	current_coin = load_game_data()["coin"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World/SpearWeapon.gd" type="Script" id=1]
+[ext_resource path="res://Player/Spear.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 38.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Animate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.513995 ),
+"transitions": PoolRealArray( 0.25, 3.36359 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ), Vector2( 0, -13 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.513995 ),
+"transitions": PoolRealArray( 0.25, 3.36359 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, -12 ) ]
+}
+
+[node name="SpearWeapon" type="Area2D"]
+collision_layer = 0
+script = ExtResource( 1 )
+WeaponIndex = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -7.84634 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -6.84634 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Animate"
+anims/Animate = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_SpearWeapon_body_entered"]

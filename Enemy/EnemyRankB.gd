@@ -280,7 +280,6 @@ func _on_BackCooldown_timeout():
 func to_players_back():
 	backCooldown.start()
 	create_dash_effect()
-	print("back")
 	back = false
 	position.x -= sprite.scale.x * 32
 	pass

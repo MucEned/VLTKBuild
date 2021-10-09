@@ -250,10 +250,9 @@ COIN = 15
 WALKING_DIRECTION = 1
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -7 )
 texture = ExtResource( 3 )
 hframes = 12
-frame = 10
 
 [node name="Weapon" parent="Sprite" index="0"]
 show_behind_parent = true
@@ -269,6 +268,9 @@ position = Vector2( 5, 0 )
 [node name="PlayerCatcher" type="RayCast2D" parent="Sprite" index="1"]
 enabled = true
 cast_to = Vector2( 200, 0 )
+
+[node name="WordInteract" parent="Sprite" index="2"]
+position = Vector2( 0, 10 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Idle"
@@ -342,11 +344,12 @@ position = Vector2( 0, -6 )
 enabled = true
 cast_to = Vector2( 200, 0 )
 
-[node name="TurnHelper" type="Timer" parent="." index="14"]
+[node name="TurnHelper" type="Timer" parent="." index="13"]
 wait_time = 0.75
 one_shot = true
 autostart = true
 
+[connection signal="enemy_drop" from="EnemyStats" to="." method="_on_EnemyStats_enemy_drop"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
 [connection signal="timeout" from="TurnHelper" to="." method="_on_TurnHelper_timeout"]
 

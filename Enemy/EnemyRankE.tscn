@@ -99,7 +99,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 3, 5 )
+extents = Vector2( 4, 6 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 6 )
@@ -134,6 +134,9 @@ damage = 2
 [node name="Collider" parent="Sprite/Weapon/HitBox" index="0"]
 position = Vector2( 12, 0 )
 shape = SubResource( 1 )
+
+[node name="WordInteract" parent="Sprite" index="1"]
+position = Vector2( 0, 11 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Move"

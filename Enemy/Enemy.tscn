@@ -5,8 +5,10 @@
 [ext_resource path="res://Enemy/Enemy.gd" type="Script" id=3]
 [ext_resource path="res://Enemy/EnemyStats.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Blink"
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 6 )
+
+[sub_resource type="Animation" id=2]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -39,9 +41,6 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6, 10 )
-
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 3 )
@@ -49,6 +48,14 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="Weapon" type="Node2D" parent="Sprite"]
+
+[node name="WordInteract" type="Area2D" parent="Sprite"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/WordInteract"]
+position = Vector2( 0, -10 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -65,17 +72,9 @@ collision_mask = 8
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [node name="BlinkAnimation" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 1 )
+anims/Blink = SubResource( 2 )
 
 [node name="MainCenter" type="Position2D" parent="."]
-
-[node name="WordInteract" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WordInteract"]
-position = Vector2( 0, -10 )
-shape = SubResource( 2 )
 
 [connection signal="hit" from="HurtBox" to="." method="_on_HurtBox_hit"]
 [connection signal="enemy_died" from="EnemyStats" to="." method="_on_EnemyStats_enemy_died"]

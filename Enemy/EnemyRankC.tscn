@@ -342,6 +342,9 @@ cast_to = Vector2( 70, 0 )
 enabled = true
 cast_to = Vector2( 50, -50 )
 
+[node name="WordInteract" parent="Sprite" index="3"]
+position = Vector2( 0, 11 )
+
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Idle"
 anims/Idle = SubResource( 2 )
@@ -376,10 +379,7 @@ max_health = 10
 position = Vector2( -2.38419e-07, -6.5 )
 scale = Vector2( 0.4, 0.65 )
 
-[node name="CollisionShape2D" parent="WordInteract" index="0"]
-position = Vector2( 0, -1 )
-
-[node name="RayCaster" parent="." index="10" instance=ExtResource( 3 )]
+[node name="RayCaster" parent="." index="9" instance=ExtResource( 3 )]
 
 [node name="FloorLeft" parent="RayCaster" index="0"]
 position = Vector2( -4, -1 )
@@ -401,7 +401,7 @@ position = Vector2( 0, -7 )
 enabled = true
 collision_mask = 2
 
-[node name="NegaArrowEye" type="Area2D" parent="." index="11"]
+[node name="NegaArrowEye" type="Area2D" parent="." index="10"]
 collision_layer = 0
 collision_mask = 64
 
@@ -410,26 +410,27 @@ position = Vector2( 0, -7 )
 rotation = 1.5708
 shape = SubResource( 10 )
 
-[node name="LeftEye" type="RayCast2D" parent="." index="12"]
+[node name="LeftEye" type="RayCast2D" parent="." index="11"]
 position = Vector2( 0, -7 )
 enabled = true
 cast_to = Vector2( -100, 0 )
 
-[node name="RightEye" type="RayCast2D" parent="." index="13"]
+[node name="RightEye" type="RayCast2D" parent="." index="12"]
 position = Vector2( 0, -6 )
 enabled = true
 cast_to = Vector2( 100, 0 )
 
-[node name="AttackCooldown" type="Timer" parent="." index="14"]
+[node name="AttackCooldown" type="Timer" parent="." index="13"]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="TurnHelper" type="Timer" parent="." index="15"]
+[node name="TurnHelper" type="Timer" parent="." index="14"]
 wait_time = 0.75
 one_shot = true
 autostart = true
 
+[connection signal="enemy_drop" from="EnemyStats" to="." method="_on_EnemyStats_enemy_drop"]
 [connection signal="body_entered" from="NegaArrowEye" to="." method="_on_NegaArrowEye_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
 [connection signal="timeout" from="TurnHelper" to="." method="_on_TurnHelper_timeout"]

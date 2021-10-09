@@ -7,13 +7,13 @@
 [ext_resource path="res://World/SmallKnife.png" type="Texture" id=5]
 [ext_resource path="res://CheckBoxes/HitBox.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 1 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 1 )
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=3]
 step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -141,7 +141,7 @@ tracks/9/keys = {
 "values": [ Vector2( 0, 4 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
 tracks/0/interp = 1
@@ -275,7 +275,7 @@ tracks/10/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=5]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -351,7 +351,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=6]
 resource_name = "Jump"
 step = 0.01
 tracks/0/type = "value"
@@ -543,7 +543,7 @@ tracks/14/keys = {
 "values": [ Vector2( 0, 4 ), Vector2( 0, -56 ), Vector2( 0, 4 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -669,7 +669,7 @@ tracks/9/keys = {
 "values": [ Vector2( 0, -7 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -985,7 +985,7 @@ collision_layer = 4
 damage = 2
 
 [node name="Collider" parent="Sprite/Weapon/BackKnife/HitBox" index="0"]
-shape = SubResource( 14 )
+shape = SubResource( 1 )
 
 [node name="FrontKnife" type="Sprite" parent="Sprite/Weapon" index="1"]
 position = Vector2( 1, 3 )
@@ -997,24 +997,27 @@ collision_layer = 4
 damage = 2
 
 [node name="Collider" parent="Sprite/Weapon/FrontKnife/HitBox" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 2 )
 
 [node name="PlayerCatcher" type="RayCast2D" parent="Sprite" index="1"]
 enabled = true
-cast_to = Vector2( 50, 0 )
+cast_to = Vector2( 60, 0 )
 
 [node name="PlayerJumpCatcher" type="RayCast2D" parent="Sprite" index="2"]
 enabled = true
 cast_to = Vector2( 45, -30 )
 
+[node name="CollisionShape2D" parent="Sprite/WordInteract" index="0"]
+position = Vector2( -1, 1 )
+
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Idle"
-anims/Dash = SubResource( 16 )
-anims/Default = SubResource( 17 )
-anims/Idle = SubResource( 18 )
-anims/Jump = SubResource( 19 )
-anims/Move = SubResource( 20 )
-anims/OnAir = SubResource( 21 )
+anims/Dash = SubResource( 3 )
+anims/Default = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Jump = SubResource( 6 )
+anims/Move = SubResource( 7 )
+anims/OnAir = SubResource( 8 )
 anims/Step = SubResource( 9 )
 
 [node name="CollisionShape2D" parent="." index="2"]
@@ -1041,13 +1044,7 @@ visible = false
 position = Vector2( 0, -7 )
 scale = Vector2( 0.5, 0.7 )
 
-[node name="WordInteract" parent="." index="9"]
-visible = false
-
-[node name="CollisionShape2D" parent="WordInteract" index="0"]
-position = Vector2( 0, -1 )
-
-[node name="RayCaster" parent="." index="10" instance=ExtResource( 3 )]
+[node name="RayCaster" parent="." index="9" instance=ExtResource( 3 )]
 visible = false
 
 [node name="FloorLeft" parent="RayCaster" index="0"]
@@ -1070,30 +1067,30 @@ position = Vector2( 0, -7 )
 enabled = true
 collision_mask = 2
 
-[node name="RightEye" type="RayCast2D" parent="." index="11"]
+[node name="RightEye" type="RayCast2D" parent="." index="10"]
 visible = false
 position = Vector2( 0, -7 )
 enabled = true
 cast_to = Vector2( 200, 0 )
 
-[node name="LeftEye" type="RayCast2D" parent="." index="12"]
+[node name="LeftEye" type="RayCast2D" parent="." index="11"]
 visible = false
 position = Vector2( 0, -7 )
 enabled = true
 cast_to = Vector2( -200, 0 )
 
-[node name="AttackCooldown" type="Timer" parent="." index="13"]
+[node name="AttackCooldown" type="Timer" parent="." index="12"]
 wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Blink" type="Timer" parent="." index="14"]
+[node name="Blink" type="Timer" parent="." index="13"]
 wait_time = 0.1
 one_shot = true
 
-[node name="TurnHelper" type="Timer" parent="." index="15"]
+[node name="TurnHelper" type="Timer" parent="." index="14"]
 
-[node name="ArrowCatcher" type="Area2D" parent="." index="16"]
+[node name="ArrowCatcher" type="Area2D" parent="." index="15"]
 visible = false
 collision_layer = 0
 collision_mask = 64
@@ -1102,10 +1099,10 @@ collision_mask = 64
 position = Vector2( 0, -7 )
 shape = SubResource( 13 )
 
-[node name="ThrowPoint" type="Position2D" parent="." index="17"]
+[node name="ThrowPoint" type="Position2D" parent="." index="16"]
 position = Vector2( 0, -15 )
 
-[node name="KnifeCatcher" type="Node2D" parent="." index="18"]
+[node name="KnifeCatcher" type="Node2D" parent="." index="17"]
 visible = false
 
 [node name="BottomLeft" type="RayCast2D" parent="KnifeCatcher" index="0"]
@@ -1122,7 +1119,7 @@ enabled = true
 cast_to = Vector2( 200, 0 )
 collision_mask = 256
 
-[node name="BackCooldown" type="Timer" parent="." index="19"]
+[node name="BackCooldown" type="Timer" parent="." index="18"]
 one_shot = true
 autostart = true
 

@@ -29,7 +29,7 @@ margin_bottom = 108.0
 margin_right = 56.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 56, 16 )
-text = "Start Game"
+text = "START GAME"
 
 [node name="LoadButton" type="Button" parent="CenterContainer/VBoxContainer"]
 visible = false
@@ -44,8 +44,19 @@ margin_top = 20.0
 margin_right = 56.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 56, 16 )
-text = "Quit"
+text = "QUIT"
+
+[node name="Reset" type="Button" parent="."]
+margin_left = 255.0
+margin_top = 3.0
+margin_right = 317.0
+margin_bottom = 14.0
+text = "Reset fot tester"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]

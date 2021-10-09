@@ -75,12 +75,9 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "sword_slashing"
-} ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath(".")
@@ -377,6 +374,10 @@ shape = SubResource( 4 )
 wait_time = 0.3
 one_shot = true
 
+[node name="ChangeState" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
 
 [editable path="HitBox"]

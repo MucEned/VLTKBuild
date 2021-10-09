@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://CheckBoxes/HurtBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Credit.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Credit" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 1 )]
+collision_mask = 8
+
+[node name="Collider" parent="HurtBox" index="0"]
+shape = SubResource( 1 )
+
+[node name="CreditPos" type="Position2D" parent="."]
+
+[connection signal="hit" from="HurtBox" to="." method="_on_HurtBox_hit"]
+
+[editable path="HurtBox"]
